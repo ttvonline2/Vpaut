@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Vpaut.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" x:Key="st_bt">
+                <Setter Property="BackgroundColor" Value="Orange"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+        </ResourceDictionary>
+        
+    </ContentPage.Resources>
+    <Grid BackgroundColor="#F2222222" ColumnSpacing="0" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="280"/>
+            <RowDefinition Height="280"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" BackgroundColor="Black">
+            <WebView x:Name="wv_stream" Source="http://google.com" x:Uid="wv_iddd"/>
+        </Grid>
+        <Grid Grid.Row="1" BackgroundColor="White" ColumnSpacing="0" RowSpacing="0">
+            <Image x:Name="im_gray"/>
+        </Grid>
+        <Grid Grid.Row="2" BackgroundColor="Gray" ColumnSpacing="0" RowSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Button Style="{x:StaticResource st_bt}" Text="Screen Capture" Clicked="Button_Clicked"/>
+            </Grid>
+            <Grid Grid.Column="1"  x:Name="gr_text" RowSpacing="0" ColumnSpacing="0">
+                
+            </Grid>
+        </Grid>
+        
+    </Grid>
+</ContentPage>
