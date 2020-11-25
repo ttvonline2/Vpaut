@@ -23,7 +23,7 @@ namespace Vpaut.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             RequestPermissions(Permission, 0);

@@ -30,10 +30,44 @@ namespace Vpaut.Droid
                 string a = "???";
             }
         }
+        public int[] offset()
+        {
+            int[] int_offset = { -1,-1 };
+            var view = currentActivityy.Window.DecorView;
+            view.DrawingCacheEnabled = true;
+            Bitmap bitmap = view.GetDrawingCache(true);
+            for(int i = 0; i < bitmap.Height; i++)
+            {
+                for(int j = 0; j < bitmap.Width; j++)
+                {
+                    var color = bitmap.GetPixel(j, i);
+                    int A = (color >> 24) & 0xff; // or color >>> 24
+                    int R = (color >> 16) & 0xff;
+                    int G = (color >> 8) & 0xff;
+                    int B = (color) & 0xff;
+                    if (R == 255 & G == 0 & B == 0)
+                    {
+                        var color2 = bitmap.GetPixel(j+1, i);
+                        int A2 = (color2 >> 24) & 0xff; // or color >>> 24
+                        int R2 = (color2 >> 16) & 0xff;
+                        int G2 = (color2 >> 8) & 0xff;
+                        int B2 = (color2) & 0xff;
+                        if (R2 == 0 & G2 == 255 & B2 == 0)
+                        {
+                            int_offset[0] = i;
+                            int_offset[1] = j;
+                            return int_offset;
+                        }
+                    }
+                }
+            }
 
-        public byte[] Capture()
+            return int_offset;
+        }
+        public int[,] Capture()
         {
 
+            int[,] Ar_Pixel = new int[40, 30];
             if (currentActivityy != null)
             {
                 string a = "hello";
@@ -48,34 +82,19 @@ namespace Vpaut.Droid
             Bitmap bitmap = view.GetDrawingCache(true);
 
             byte[] bitmapData;
-            
-            using (var stream = new MemoryStream())
+
+            for (int i = 100; i < 140; i++)
             {
-
-
-                //bitmap.GetPixels(ar_pixels, 0, 1000,0,0, 600, 400);
-                Color _cl = new Color();
-                _cl.R = 0;
-                _cl.G = 0;
-                _cl.B = 0;
-                for(int i = 0; i < bitmap.Width; i++)
+                for (int j = 100; j < 130; j++)
                 {
-                    for(int j = 0; j < bitmap.Height; j++)
-                    {
-                        int color =  bitmap.GetPixel(i, j);
-                        int A = (color >> 24) & 0xff; // or color >>> 24
-                        int R = (color >> 16) & 0xff;
-                        int G = (color >> 8) & 0xff;
-                        int B = (color) & 0xff;
-                    }
+                    Ar_Pixel[i-100,j-100] = bitmap.GetPixel(i, j);
+                    //int A = (color >> 24) & 0xff; // or color >>> 24
+                    //int R = (color >> 16) & 0xff;
+                    //int G = (color >> 8) & 0xff;
+                    //int B = (color) & 0xff;
                 }
-                bitmap.Compress(Bitmap.CompressFormat.Png, 5, stream);
-
-                return stream.ToArray();
             }
-
-            
-
+            return Ar_Pixel;
         }
 
     }

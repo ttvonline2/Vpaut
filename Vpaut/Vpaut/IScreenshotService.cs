@@ -9,7 +9,7 @@ namespace Vpaut
 {
     public interface IScreenshotService
     {
-
-        byte[] Capture();
+        int[,] Capture();
+        int[] offset();
     }
 }
