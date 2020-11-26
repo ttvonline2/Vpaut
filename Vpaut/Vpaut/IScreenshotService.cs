@@ -10,6 +10,7 @@ namespace Vpaut
     public interface IScreenshotService
     {
         int[,] Capture();
+        byte[] fullscreen();
         int[] offset();
     }
 }

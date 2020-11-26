@@ -64,18 +64,9 @@ namespace Vpaut.Droid
 
             return int_offset;
         }
-        public int[,] Capture()
-        {
 
-            int[,] Ar_Pixel = new int[40, 30];
-            if (currentActivityy != null)
-            {
-                string a = "hello";
-            }
-            else
-            {
-                string a = "???";
-            }
+        public byte[] fullscreen()
+        {
             var view = currentActivityy.Window.DecorView;
             view.DrawingCacheEnabled = true;
 
@@ -83,11 +74,29 @@ namespace Vpaut.Droid
 
             byte[] bitmapData;
 
-            for (int i = 100; i < 140; i++)
+            using (var stream = new MemoryStream())
             {
-                for (int j = 100; j < 130; j++)
+                bitmap.Compress(Bitmap.CompressFormat.Png,100, stream);
+                return stream.ToArray();
+            }
+        }
+        public int[,] Capture()
+        {
+
+            int[,] Ar_Pixel = new int[40, 30];
+
+            var view = currentActivityy.Window.DecorView;
+            view.DrawingCacheEnabled = true;
+
+            Bitmap bitmap = view.GetDrawingCache(true);
+
+            byte[] bitmapData;
+
+            for (int i = 24; i < 64; i++)
+            {
+                for (int j = 24; j < 54; j++)
                 {
-                    Ar_Pixel[i-100,j-100] = bitmap.GetPixel(i, j);
+                    Ar_Pixel[i-24,j-24] = bitmap.GetPixel(i, j);
                     //int A = (color >> 24) & 0xff; // or color >>> 24
                     //int R = (color >> 16) & 0xff;
                     //int G = (color >> 8) & 0xff;

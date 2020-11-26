@@ -18,19 +18,20 @@
 
     <Grid BackgroundColor="#F2222222" ColumnSpacing="0" RowSpacing="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="160"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="280"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
        
-        <Grid Grid.Row="0" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
+        <Grid Grid.Row="1" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="14"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" BackgroundColor="#FF00FF" ColumnSpacing="0" RowSpacing="0">
-                <WebView x:Name="wv_stream" Source="http://google.com" x:Uid="wv_iddd"/>
-                <!--<Grid.ColumnDefinitions>
+                <!--<WebView x:Name="wv_stream" Source="http://192.168.4.1/" x:Uid="wv_iddd"/>-->
+                <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="1"/>
@@ -42,21 +43,31 @@
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="1"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" BackgroundColor="Aqua"></Grid>
-                <Grid Grid.Column="1" BackgroundColor="HotPink"></Grid>
-                <Grid Grid.Column="2" BackgroundColor="SeaShell"></Grid>
+                <Grid Grid.Column="0" BackgroundColor="#FFFF00FF"></Grid>
+                <Grid Grid.Column="1" BackgroundColor="#FFAA11AA"></Grid>
+                <Grid Grid.Column="2" BackgroundColor="#FFBB1100"></Grid>
                 <Grid Grid.Column="3" BackgroundColor="Sienna"></Grid>
                 <Grid Grid.Column="4" BackgroundColor="Goldenrod"></Grid>
                 <Grid Grid.Column="5" BackgroundColor="Red"></Grid>
                 <Grid Grid.Column="6" BackgroundColor="OldLace"></Grid>
                 <Grid Grid.Column="7" BackgroundColor="LawnGreen"></Grid>
-                <Grid Grid.Column="8" BackgroundColor="OrangeRed"></Grid>-->
+                <Grid Grid.Column="8" BackgroundColor="Lime"></Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
-            <Image x:Name="im_gray"/>
+        <Grid Grid.Row="0" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" BackgroundColor="#FF00FF" ColumnSpacing="0" RowSpacing="0">
+                <WebView x:Name="wv_stream" Source="http://192.168.4.1/" x:Uid="wv_iddd"/>
+            </Grid>
+               
         </Grid>
         <Grid Grid.Row="2" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
+            <Image x:Name="im_gray"/>
+        </Grid>
+        <Grid Grid.Row="3" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="3*"/>
