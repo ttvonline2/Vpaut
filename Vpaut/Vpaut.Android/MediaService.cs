@@ -17,10 +17,13 @@ namespace Vpaut.Droid
     {
         int[] ar_pixels;
         static Activity currentActivityy;
+        static View view;
         public void SetActivity(Activity activity)
         {
 
             currentActivityy = activity;
+
+            view = currentActivityy.Window.DecorView;
             if (currentActivityy != null)
             {
                 string a = "hello";
@@ -65,6 +68,7 @@ namespace Vpaut.Droid
             return int_offset;
         }
 
+        [Obsolete]
         public byte[] fullscreen()
         {
             var view = currentActivityy.Window.DecorView;
@@ -72,38 +76,47 @@ namespace Vpaut.Droid
 
             Bitmap bitmap = view.GetDrawingCache(true);
 
-            byte[] bitmapData;
-
             using (var stream = new MemoryStream())
             {
                 bitmap.Compress(Bitmap.CompressFormat.Png,100, stream);
                 return stream.ToArray();
             }
         }
+
+        [Obsolete]
         public int[,] Capture()
         {
 
             int[,] Ar_Pixel = new int[40, 30];
 
-            var view = currentActivityy.Window.DecorView;
-            view.DrawingCacheEnabled = true;
+            var rootView = currentActivityy.Window.DecorView.RootView;
 
-            Bitmap bitmap = view.GetDrawingCache(true);
-
-            byte[] bitmapData;
-
-            for (int i = 24; i < 64; i++)
+            using (var bitmap = Bitmap.CreateBitmap(
+                                    rootView.Width,
+                                    rootView.Height,
+                                    Bitmap.Config.Argb8888))
             {
-                for (int j = 24; j < 54; j++)
+                var canvas = new Canvas(bitmap);
+                rootView.Draw(canvas);
+                for (int i = 24; i < 64; i++)
                 {
-                    Ar_Pixel[i-24,j-24] = bitmap.GetPixel(i, j);
-                    //int A = (color >> 24) & 0xff; // or color >>> 24
-                    //int R = (color >> 16) & 0xff;
-                    //int G = (color >> 8) & 0xff;
-                    //int B = (color) & 0xff;
+                    for (int j = 24; j < 54; j++)
+                    {
+                        Ar_Pixel[i - 24, j - 24] = bitmap.GetPixel(i, j);
+                        //int A = (color >> 24) & 0xff; // or color >>> 24
+                        //int R = (color >> 16) & 0xff;
+                        //int G = (color >> 8) & 0xff;
+                        //int B = (color) & 0xff;
+                    }
                 }
+                return Ar_Pixel;
             }
-            return Ar_Pixel;
+            //  view.DrawingCacheEnabled = true;
+
+            // Bitmap bitmap = view.GetDrawingCache(true);
+
+
+            
         }
 
     }

@@ -1,0 +1,24 @@
+﻿Starting emulator Android_Accelerated_x86_Oreo ...
+1>------ Build started: Project: Vpaut, Configuration: Debug Any CPU ------
+C:\Program Files (x86)\Android\android-sdk\emulator\emulator.EXE -no-boot-anim -avd Android_Accelerated_x86_Oreo -prop monodroid.avdname=Android_Accelerated_x86_Oreo
+1>Vpaut -> V:\15. Xamarin\09. PAUT\Vpaut\Vpaut\Vpaut\bin\Debug\netstandard2.0\Vpaut.dll
+2>------ Build started: Project: Vpaut.Android, Configuration: Debug Any CPU ------
+ERROR: resizing partition e2fsck failed with exit code 8
+emulator: WARNING: Crash service did not start
+emulator: WARNING: userdata partition is resized from 770 M to 800 M
+HAX is working and emulator runs in fast virt mode.
+dsound: Could not initialize DirectSoundCapture
+dsound: Reason: No sound driver is available for use, or the given GUID is not a valid DirectSound device ID
+dsound: Attempt to initialize voice without DirectSoundCapture object
+dsound: Attempt to initialize voice without DirectSoundCapture object
+audio: Failed to create voice `goldfish_audio_in'
+C:\Program Files (x86)\Android\android-sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe: warning: opening audio input failed
+dsound: Attempt to initialize voice without DirectSoundCapture object
+dsound: Attempt to initialize voice without DirectSoundCapture object
+audio: Failed to create voice `adc'
+dsound: Attempt to initialize voice without DirectSoundCapture object
+dsound: Attempt to initialize voice without DirectSoundCapture object
+audio: Failed to create voice `adc'
+Emulator Android_Accelerated_x86_Oreo is running.
+Waiting for emulator to be ready...
+emulator: Saving state on exit with session uptime 4135 ms

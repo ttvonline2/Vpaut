@@ -10,7 +10,7 @@
             <Style TargetType="Button" x:Key="st_bt">
                 <Setter Property="BackgroundColor" Value="Orange"/>
                 <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="FontSize" Value="Small"/>
             </Style>
         </ResourceDictionary>
         
@@ -19,18 +19,18 @@
     <Grid BackgroundColor="#F2222222" ColumnSpacing="0" RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="280"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
        
-        <Grid Grid.Row="1" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
+        <!--<Grid Grid.Row="1" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="14"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" BackgroundColor="#FF00FF" ColumnSpacing="0" RowSpacing="0">
-                <!--<WebView x:Name="wv_stream" Source="http://192.168.4.1/" x:Uid="wv_iddd"/>-->
+                --><!--<WebView x:Name="wv_stream" Source="http://192.168.4.1/" x:Uid="wv_iddd"/>--><!--
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="1"/>
@@ -53,7 +53,8 @@
                 <Grid Grid.Column="7" BackgroundColor="LawnGreen"></Grid>
                 <Grid Grid.Column="8" BackgroundColor="Lime"></Grid>
             </Grid>
-        </Grid>
+        </Grid>-->
+        
         <Grid Grid.Row="0" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
@@ -64,18 +65,34 @@
             </Grid>
                
         </Grid>
-        <Grid Grid.Row="2" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
-            <Image x:Name="im_gray"/>
+        
+        <Grid Grid.Row="1" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Column="0" ColumnSpacing="0" BackgroundColor="White" RowSpacing="0">
+                
+                <AbsoluteLayout  x:Name="gr_Simulate"  >
+                    <BoxView AbsoluteLayout.LayoutBounds="60,45,45,5" BackgroundColor="Red" Rotation="135"/>
+                    <BoxView AbsoluteLayout.LayoutBounds="10,10,50,5" BackgroundColor="Blue"/>
+                </AbsoluteLayout>
+                
+            </Grid>
         </Grid>
-        <Grid Grid.Row="3" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
+        
+        <Grid Grid.Row="2" BackgroundColor="Black" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Button Style="{x:StaticResource st_bt}" Text="Screen Capture" Clicked="Button_Clicked"/>
             </Grid>
             <Grid Grid.Column="1"  x:Name="gr_text" RowSpacing="0" ColumnSpacing="0">
+                <Button Style="{x:StaticResource st_bt}" Text="Screen Capture" x:Name="bt_simulate" Clicked="bt_simulate_Clicked" />
             </Grid>
         </Grid>
     </Grid>
