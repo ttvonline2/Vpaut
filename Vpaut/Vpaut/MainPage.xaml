@@ -20,6 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="90"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="90"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -66,23 +67,58 @@
                
         </Grid>
         
-        <Grid Grid.Row="1" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0" >
+        <Grid Grid.Row="1" BackgroundColor="Black"  RowSpacing="0" >
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Grid Grid.Column="0" ColumnSpacing="0" BackgroundColor="White" RowSpacing="0">
-                
                 <AbsoluteLayout  x:Name="gr_Simulate"  >
                     <BoxView AbsoluteLayout.LayoutBounds="60,45,45,5" BackgroundColor="Red" Rotation="135"/>
                     <BoxView AbsoluteLayout.LayoutBounds="10,10,50,5" BackgroundColor="Blue"/>
                 </AbsoluteLayout>
-                
+            </Grid>
+
+            <Grid Grid.Column="1" ColumnSpacing="0" BackgroundColor="White" RowSpacing="0">
+                <AbsoluteLayout  x:Name="gr_Simulate2"  >
+                    <BoxView AbsoluteLayout.LayoutBounds="60,45,45,5" BackgroundColor="Red" Rotation="135"/>
+                    <BoxView AbsoluteLayout.LayoutBounds="10,10,50,5" BackgroundColor="Blue"/>
+                </AbsoluteLayout>
+            </Grid>
+
+            <Grid Grid.Column="2" ColumnSpacing="0" BackgroundColor="White" RowSpacing="0">
+                <AbsoluteLayout  x:Name="gr_Simulate3"  >
+                    <Label x:Name="lb_l1" AbsoluteLayout.LayoutBounds="0,0"  Text="0 0 0 1 0 0 0" FontSize="22" TextColor="Black"/>
+                    <Label x:Name="lb_l2" AbsoluteLayout.LayoutBounds="0,30" Text="0 0 0 0 0 1 0" FontSize="22" TextColor="Black"/>
+                    <Label x:Name="lb_l3" AbsoluteLayout.LayoutBounds="0,60" Text="0 0 0 1 0 0 0" FontSize="22" TextColor="Black"/>
+                </AbsoluteLayout>
             </Grid>
         </Grid>
-        
-        <Grid Grid.Row="2" BackgroundColor="Black" >
+        <Grid Grid.Row="2" BackgroundColor="Black"  RowSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
+                <Label x:Name="lb_fps1" Text="1" TextColor="White" VerticalTextAlignment="Center"
+                       HorizontalOptions="Center"/>
+            </Grid>
+            <Grid Grid.Column="1" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
+                <Label x:Name="lb_fps2" Text="1" TextColor="White" VerticalTextAlignment="Center"
+                       HorizontalOptions="Center"/>
+            </Grid>
+            <Grid Grid.Column="2" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
+                <Label x:Name="lb_fps3" FontSize="10" Text="111111111111111" TextColor="White" VerticalTextAlignment="Center"
+                       HorizontalOptions="Center"/>
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="3" BackgroundColor="Black" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>

@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace Vpaut.Droid
 {
@@ -31,6 +32,8 @@ namespace Vpaut.Droid
 
             DependencyService.Register<ScreenshotService>();
             DependencyService.Get<ScreenshotService>().SetActivity(this);
+
+            DeviceDisplay.KeepScreenOn = true;
 
             LoadApplication(new App());
         }
