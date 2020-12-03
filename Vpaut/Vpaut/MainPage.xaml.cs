@@ -18,6 +18,7 @@ namespace Vpaut
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        #region Variable
         int[] int_Line = new int[30];
         int cc = 0;
         int[] int_Line2 = new int[30]; int[] int_Line3 = new int[30];
@@ -34,6 +35,35 @@ namespace Vpaut
             InitializeComponent();
 
         }
+        #endregion
+
+        #region page Swap
+
+        private async void bt_page1_Clicked(object sender, EventArgs e) //PAGE MANUAL
+        {
+            wv_stream.Source = new Uri("http://192.168.4.1/stop");
+            wv_Manual.Source = new Uri("http://192.168.4.1/");
+            await gr_page2.FadeTo(0, 250);
+            gr_page2.IsVisible = false;
+            gr_page1.Opacity = 0;
+            gr_page1.IsVisible = true;
+            await gr_page1.FadeTo(1, 250);
+
+        }
+
+        private async void bt_page2_Clicked(object sender, EventArgs e)//PAGE Auto
+        {
+            wv_Manual.Source = new Uri("http://192.168.4.1/stop");
+            wv_stream.Source = new Uri("http://192.168.4.1/");
+            gr_page1.Opacity = 1;
+            await gr_page1.FadeTo(0, 250);
+            gr_page1.IsVisible = false;
+            gr_page2.Opacity = 0;
+            gr_page2.IsVisible = true;
+            await gr_page2.FadeTo(1, 250);
+        }
+        #endregion
+
         void Create_Box(AbsoluteLayout abLayout, int[] _ar)
         {
             abLayout.Children.Clear();
@@ -42,11 +72,30 @@ namespace Vpaut
                 abLayout.Children.Add(new BoxView
                 {
                     Color = Color.Red,
-                }, new Xamarin.Forms.Rectangle(0, 3*i,_ar[i]*3, 3));
+                }, new Xamarin.Forms.Rectangle(0, 3 * i, _ar[i] * 3, 3));
                 abLayout.Children.Add(new BoxView
                 {
                     Color = Color.Red,
                 }, new Xamarin.Forms.Rectangle(_ar[i] * 3+3, 3*i, (39-_ar[i]) * 3, 3));
+
+            }
+
+        }
+        void Create_Line(AbsoluteLayout abLayout, int[] _ar)
+        {
+            abLayout.Children.Clear();
+            for (int i = 0; i < 1; i++)
+            {
+                abLayout.Children.Add(new BoxView
+                {
+                    Color = Color.Red,
+                    Rotation = 50
+                }, new Xamarin.Forms.Rectangle(0, 3 * i, _ar[i] * 3, 3)) ;
+                abLayout.Children.Add(new BoxView
+                {
+                    Color = Color.Red,
+                    Rotation = 50
+                }, new Xamarin.Forms.Rectangle(_ar[i] * 3 + 3, 3 * i, (39 - _ar[i]) * 3, 3));
 
             }
 
@@ -67,7 +116,7 @@ namespace Vpaut
             {
                 _pos[2] += _ar[i];
             }
-            _pos[0] = (int)(_pos[0] / 48.33);
+            _pos[0] = (int)(_pos[0] / 48.33);  // Convert 29 -> 6. average / 10. 48.33  = 10*29/6
             _pos[1] = (int)(_pos[1] / 48.33);
             _pos[2] = (int)(_pos[2] / 48.33);
             for(int j = 0; j < 3; j ++)
@@ -96,37 +145,6 @@ namespace Vpaut
             }
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            await Task.Run(() =>
-            {
-                while (true)
-                {
-                    try
-                    {
-                        ReadFrame(int_Line3);
-                        Create_Vector(int_Line3);
-                        Device.BeginInvokeOnMainThread(() =>
-                        {
-                            lb_l1.Text = _st_pos[0];
-                            lb_l2.Text = _st_pos[1];
-                            lb_l3.Text = _st_pos[2];
-                            Update_FPS3();                       
-                        }); 
-                    }
-                    catch
-                    {
-                        Device.BeginInvokeOnMainThread(() =>
-                        {
-                            lb_fps3.Text = "0";
-                        });
-                    }
-
-                }
-            });
-        }
-
-
         void Update_FPS()
         {
             framesRendered++;
@@ -141,7 +159,6 @@ namespace Vpaut
             }
 
             // draw FPS on screen here using current value of _fps          
-            lb_fps1.Text = fps.ToString() ;
         }
         private async void bt_simulate_Clicked(object sender, EventArgs e)
         {
@@ -163,7 +180,7 @@ namespace Vpaut
                     {
                         Device.BeginInvokeOnMainThread(() =>
                         {
-                            lb_fps1.Text = "0";
+
                         });
                     }
 
@@ -197,45 +214,5 @@ namespace Vpaut
 
         }
 
-        void ShowRedPoint()
-        {
-
-        }
-
-        // Test
-
-        void Update_FPS2()
-        {
-            framesRendered2++;
-
-            if ((DateTime.Now - lastTime2).TotalSeconds >= 1)
-            {
-                // one second has elapsed 
-
-                fps2 = framesRendered2;
-                framesRendered2 = 0;
-                lastTime2 = DateTime.Now;
-            }
-
-            // draw FPS on screen here using current value of _fps          
-            lb_fps2.Text = fps2.ToString();
-        }
-        void Update_FPS3()
-        {
-            framesRendered3++;
-
-            if ((DateTime.Now - lastTime3).TotalSeconds >= 1)
-            {
-                // one second has elapsed 
-
-                fps3 = framesRendered3;
-                framesRendered3 = 0;
-                lastTime3 = DateTime.Now;
-            }
-
-            // draw FPS on screen here using current value of _fps          
-            lb_fps3.Text = fps3.ToString();
-        }
-       
     }
 }

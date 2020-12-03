@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Vpaut.MainPage">
+             x:Class="Vpaut.MainPage" BackgroundColor="Black">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Button" x:Key="st_bt">
@@ -13,124 +13,107 @@
                 <Setter Property="FontSize" Value="Small"/>
             </Style>
         </ResourceDictionary>
-        
     </ContentPage.Resources>
 
-    <Grid BackgroundColor="#F2222222" ColumnSpacing="0" RowSpacing="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-       
-        <!--<Grid Grid.Row="1" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="14"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" BackgroundColor="#FF00FF" ColumnSpacing="0" RowSpacing="0">
-                --><!--<WebView x:Name="wv_stream" Source="http://192.168.4.1/" x:Uid="wv_iddd"/>--><!--
+    <Grid RowSpacing= "0" ColumnSpacing="0" BackgroundColor="Black">
+        <Grid RowSpacing="0" ColumnSpacing="0" x:Name="gr_page1" IsVisible="false" BackgroundColor="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="#0e0e0e">
+                <WebView x:Name="wv_Manual"/>
+            </Grid>
+            <Grid Grid.Row="1" RowSpacing="0" ColumnSpacing="0" BackgroundColor="Black">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" BackgroundColor="#FFFF00FF"></Grid>
-                <Grid Grid.Column="1" BackgroundColor="#FFAA11AA"></Grid>
-                <Grid Grid.Column="2" BackgroundColor="#FFBB1100"></Grid>
-                <Grid Grid.Column="3" BackgroundColor="Sienna"></Grid>
-                <Grid Grid.Column="4" BackgroundColor="Goldenrod"></Grid>
-                <Grid Grid.Column="5" BackgroundColor="Red"></Grid>
-                <Grid Grid.Column="6" BackgroundColor="OldLace"></Grid>
-                <Grid Grid.Column="7" BackgroundColor="LawnGreen"></Grid>
-                <Grid Grid.Column="8" BackgroundColor="Lime"></Grid>
-            </Grid>
-        </Grid>-->
-        
-        <Grid Grid.Row="0" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" BackgroundColor="#FF00FF" ColumnSpacing="0" RowSpacing="0">
-                <WebView x:Name="wv_stream" Source="http://192.168.4.1/" x:Uid="wv_iddd"/>
-            </Grid>
-               
-        </Grid>
-        
-        <Grid Grid.Row="1" BackgroundColor="Black"  RowSpacing="0" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0" ColumnSpacing="0" BackgroundColor="White" RowSpacing="0">
-                <AbsoluteLayout  x:Name="gr_Simulate"  >
-                    <BoxView AbsoluteLayout.LayoutBounds="60,45,45,5" BackgroundColor="Red" Rotation="135"/>
-                    <BoxView AbsoluteLayout.LayoutBounds="10,10,50,5" BackgroundColor="Blue"/>
-                </AbsoluteLayout>
-            </Grid>
-
-            <Grid Grid.Column="1" ColumnSpacing="0" BackgroundColor="White" RowSpacing="0">
-                <AbsoluteLayout  x:Name="gr_Simulate2"  >
-                    <BoxView AbsoluteLayout.LayoutBounds="60,45,45,5" BackgroundColor="Red" Rotation="135"/>
-                    <BoxView AbsoluteLayout.LayoutBounds="10,10,50,5" BackgroundColor="Blue"/>
-                </AbsoluteLayout>
-            </Grid>
-
-            <Grid Grid.Column="2" ColumnSpacing="0" BackgroundColor="White" RowSpacing="0">
-                <AbsoluteLayout  x:Name="gr_Simulate3"  >
-                    <Label x:Name="lb_l1" AbsoluteLayout.LayoutBounds="0,0"  Text="0 0 0 1 0 0 0" FontSize="22" TextColor="Black"/>
-                    <Label x:Name="lb_l2" AbsoluteLayout.LayoutBounds="0,30" Text="0 0 0 0 0 1 0" FontSize="22" TextColor="Black"/>
-                    <Label x:Name="lb_l3" AbsoluteLayout.LayoutBounds="0,60" Text="0 0 0 1 0 0 0" FontSize="22" TextColor="Black"/>
-                </AbsoluteLayout>
+                <Grid Grid.Column="0" BackgroundColor="#0e0e0e">
+                    <Label Text="MANUAL CONTROL" FontAttributes="Bold" TextColor="White" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                </Grid>
+                <Grid Grid.Column="1" BackgroundColor="#bfd3e2">
+                    <Button Text="Auto Control" BackgroundColor="#bfd3e2" TextColor="Black" x:Name="bt_page2" Clicked="bt_page2_Clicked"/>
+                </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Row="2" BackgroundColor="Black"  RowSpacing="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
-                <Label x:Name="lb_fps1" Text="1" TextColor="White" VerticalTextAlignment="Center"
-                       HorizontalOptions="Center"/>
-            </Grid>
-            <Grid Grid.Column="1" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
-                <Label x:Name="lb_fps2" Text="1" TextColor="White" VerticalTextAlignment="Center"
-                       HorizontalOptions="Center"/>
-            </Grid>
-            <Grid Grid.Column="2" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="0">
-                <Label x:Name="lb_fps3" FontSize="10" Text="111111111111111" TextColor="White" VerticalTextAlignment="Center"
-                       HorizontalOptions="Center"/>
-            </Grid>
+        <Grid RowSpacing="0" ColumnSpacing="0" x:Name="gr_page2" BackgroundColor="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="#bfd3e2" ColumnSpacing="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="90"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" ColumnSpacing="0" RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" BackgroundColor="#FF00FF" ColumnSpacing="0" RowSpacing="0">
+                        <WebView x:Name="wv_stream" Source="http://192.168.4.1/" x:Uid="wv_iddd"/>
+                    </Grid>
+                    <Grid Grid.Column="1" RowSpacing="0" ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Label Text=" >>> Input stream" TextColor="Black" VerticalOptions="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Label x:Name="lb_FPS" Text="FPS: 50" TextColor="Black" VerticalOptions="Center" HorizontalOptions="End"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" BackgroundColor="#bfd3e2" RowSpacing="0" >
+                    <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                        <AbsoluteLayout  x:Name="gr_Simulate" BackgroundColor="White" >
+                            <BoxView AbsoluteLayout.LayoutBounds="0,44,120,2" BackgroundColor="Pink"/>
+                            <BoxView AbsoluteLayout.LayoutBounds="15,44,91,2" Rotation="90" BackgroundColor="Pink"/>
+                            <BoxView AbsoluteLayout.LayoutBounds="38,21,45,5" BackgroundColor="Red" Rotation="90" x:Name="line_go"/>
+                            <BoxView AbsoluteLayout.LayoutBounds="38,65,45,5" BackgroundColor="Blue" Rotation="90" x:Name="line_back"/>
+                        </AbsoluteLayout>
+                        </Grid>
+                    <Grid Grid.Column="1" BackgroundColor="Green">
 
-        </Grid>
-        <Grid Grid.Row="3" BackgroundColor="Black" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Button Style="{x:StaticResource st_bt}" Text="Screen Capture" Clicked="Button_Clicked"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2" RowSpacing="0" ColumnSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        
+                    </Grid>
+                </Grid>
             </Grid>
-            <Grid Grid.Column="1"  x:Name="gr_text" RowSpacing="0" ColumnSpacing="0">
-                <Button Style="{x:StaticResource st_bt}" Text="Screen Capture" x:Name="bt_simulate" Clicked="bt_simulate_Clicked" />
+            
+            <!--Bottom Manual and Auto Control area-->
+            <Grid Grid.Row="1" RowSpacing="0" ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" BackgroundColor="#F2222222">
+                    <Button Text="Manual Control" BackgroundColor="#F2222222" TextColor="White" Clicked="bt_page1_Clicked"/>
+                </Grid>
+                <Grid Grid.Column="1" BackgroundColor="#bfd3e2">
+                    <Label Text="AUTO CONTROL" BackgroundColor="#bfd3e2" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                </Grid>
             </Grid>
         </Grid>
+       
     </Grid>
+   
 
 </ContentPage>
