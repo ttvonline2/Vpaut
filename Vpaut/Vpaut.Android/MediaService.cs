@@ -15,7 +15,6 @@ namespace Vpaut.Droid
 {
     public class ScreenshotService : IScreenshotService
     {
-        int[] ar_pixels;
         static Activity currentActivityy;
         static View view;
         public void SetActivity(Activity activity)
@@ -24,15 +23,9 @@ namespace Vpaut.Droid
             currentActivityy = activity;
 
             view = currentActivityy.Window.DecorView;
-            if (currentActivityy != null)
-            {
-                string a = "hello";
-            }
-            else
-            {
-                string a = "???";
-            }
         }
+
+        [Obsolete]
         public int[] offset()
         {
             int[] int_offset = { -1,-1 };

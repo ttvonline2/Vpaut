@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android.Graphics;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Xamarin.Forms.Shapes;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Color = Xamarin.Forms.Color;
@@ -19,17 +21,16 @@ namespace Vpaut
     public partial class MainPage : ContentPage
     {
         #region Variable
+        bool b_Auto = false;
+        double X1, X2, Y1, Y2;
         int[] int_Line = new int[30];
-        int cc = 0;
-        int[] int_Line2 = new int[30]; int[] int_Line3 = new int[30];
-        int framesRendered = 0, fps = 0;
+        int framesRendered = 0, int_fps = 0;
         DateTime lastTime;
         string[] _st_pos = new string[3];
-        // 
-        int framesRendered2 = 0, fps2 = 0;
-        DateTime lastTime2;
-        int framesRendered3 = 0, fps3 = 0;
-        DateTime lastTime3;
+        string[] st_Command = { "http://192.168.4.1/sp",
+            "http://192.168.4.1/left", "http://192.168.4.1/go", "http://192.168.4.1/right",
+            "http://192.168.4.1/rl", "http://192.168.4.1/stop", "http://192.168.4.1/rr", 
+            "http://192.168.4.1/bl", "http://192.168.4.1/back", "http://192.168.4.1/br"};
         public MainPage()
         {
             InitializeComponent();
@@ -148,17 +149,13 @@ namespace Vpaut
         void Update_FPS()
         {
             framesRendered++;
-
             if ((DateTime.Now - lastTime).TotalSeconds >= 1)
             {
-                // one second has elapsed 
-
-                fps = framesRendered;
+                int_fps = framesRendered;
                 framesRendered = 0;
                 lastTime = DateTime.Now;
             }
-
-            // draw FPS on screen here using current value of _fps          
+            lb_FPS.Text = int_fps.ToString() ;
         }
         private async void bt_simulate_Clicked(object sender, EventArgs e)
         {
@@ -187,11 +184,134 @@ namespace Vpaut
                 }      
             });
         }
+
+        #region Auto Button
+        private void bt_Stop_Clicked(object sender, EventArgs e)
+        {
+            // Cancel auto mod
+            b_Auto = false;
+            int_fps = 0;
+            lb_FPS.Text = "Stopped";
+            //Stop command
+            wv_command.Source = new Uri(st_Command[5]);
+        }
+
+        private async void bt_Go_Clicked(object sender, EventArgs e)
+        {
+            b_Auto = true;
+            await Task.Run(() =>
+            {
+                while (b_Auto)
+                {
+                    try
+                    {
+                        ReadFrame(int_Line);
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            DetectLine(int_Line);
+                            lb_td.Text = ((int)X1).ToString() + " - " + ((int)X2).ToString() + " - " + ((int)((X1 + X2) / 2)).ToString();
+                            Update_FPS();
+                            GoGo();
+                        });
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Drop");
+                    }
+
+                }
+            });
+
+        }
+
+        private void bt_Back_Clicked(object sender, EventArgs e)
+        {
+            VCommand(100, 10, 4);
+        }
+        #endregion
+
+        async void GoGo()
+        {
+            int _Va1 =(int) (X1 - X2);
+            int _N1 = 3,_N2 = 4;
+
+            int _Va2 = (int)((X1 + X2) / 2)-19;
+            if(_Va1>_N1)
+            {
+                if(_Va2>_N2)
+                {
+                    VCommand(100, 1, 2);
+                }
+                else if(_Va2<_N2)
+                {
+                    VCommand(100, 1, 6);
+                }
+                else
+                {
+                    VCommand(100, 1, 6);
+                }
+            }
+            else if (_Va1 <-_N1)
+            {
+                if (_Va2 > _N2)
+                {
+                    VCommand(100, 1, 4);
+                }
+                else if (_Va2 < -_N2)
+                {
+                    VCommand(100, 1, 2);
+                }
+                else
+                {
+                    VCommand(100, 1, 4);
+                }
+            }
+            else
+            {
+                if (_Va2 > _N2)
+                {
+                    VCommand(100, 1, 4);
+                }
+                else if (_Va2 < -_N2)
+                {
+                    VCommand(100, 1, 6);
+                }
+                else
+                {
+                    VCommand(100, 1, 2);
+                }
+            }
+            await Task.Delay(100);
+            wv_command.Source = new Uri(st_Command[5]);
+        }
+        void DetectLine(int[] _int_line)
+        {
+            gr_Simulate.Children.Clear();
+            for (int i = 0; i < 15; i ++)
+            {
+                X1 += _int_line[i];
+            }
+            X1 = X1 / 15;
+
+            for (int i = 15; i < 30; i++)
+            {
+                X2 += _int_line[i];
+            }
+            X2 = X2 / 15;
+
+            Line _ln = new Line();
+            _ln.X1 = X1*3;
+            _ln.Y1 = 0;
+            _ln.X2 = X2*3;
+            _ln.Y2 = 90;
+            _ln.StrokeThickness = 7;
+            _ln.Stroke = Xamarin.Forms.Brush.Red;
+            gr_Simulate.Children.Add(_ln);
+        }
+        //Return the max value of color each a width line; 30 values
         void ReadFrame(int[] _int_line)
         {
-            Console.WriteLine("Start");
             var arImg = DependencyService.Get<IScreenshotService>().Capture();
-
             for (int i = 0; i < 30; i++)
             {
                 int max = 0; int vt = 0;
@@ -210,9 +330,24 @@ namespace Vpaut
                 }
             }
             //im_gray.Source = ImageSource.FromStream(() => new MemoryStream(arImg));
-            Console.WriteLine("Read done!");
+           // Console.Write("Frame read...!");
 
         }
-
+        
+        void VCommand(int _interuptPeriod, int _step, int _Command)
+        {
+            for(int i = 0; i < _step; i ++)
+            {
+                wv_command.Source = new Uri(st_Command[_Command]);
+            }
+        }
     }
 }
+/* Tomorrow: 
+1. Light adjust -->
+2. Get the best value from stream view
+3. reject the error value. if value j - value j-1 > 2 ==> error. 
+4. making a line --> selected Direction
+5. Step by step each command;
+
+*/
